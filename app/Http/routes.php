@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -26,6 +22,29 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+
+    Route::group(['domain' => 'dev.back-gammon.tv'], function() {
+        Route::get('', 'Regular\Controller@index');
+        Route::get('sss', 'Regular\Controller@show');
+        Route::get('aaa', function () {
+            return view('welcome');
+        });
+        Route::get('test/xg', 'Regular\PositionController@test');
+        Route::get('images/xg', 'Regular\PositionController@images');
+        Route::get('download/xg', 'Regular\PositionController@download');
+    });
+
+    Route::group(['domain' => 'reg.back-gammon.tv'], function() {
+        Route::get('', function () {
+            return 'Hello! Domain3';
+        });
+    });
+});
+
+Route::get('', function () {
+    return 'Hello!';
 });
