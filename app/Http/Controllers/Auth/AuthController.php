@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+
+use Auth;
+use Socialite;
+use Validator;
+use Redirect;
+
+use App\User;
+use App\Oauth;
+use App\Http\Controllers\Controller;
+
 
 class AuthController extends Controller
 {
@@ -35,8 +43,7 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
@@ -46,8 +53,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data) {
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -61,12 +67,52 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
-    {
+    protected function create(array $data) {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function redirectToProvider($provider) {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider) {
+        $oauthUser = Socialite::driver($provider)->user(); // TODO キャンセル時にエラー！
+        if (Auth::check()) {
+            $user = Auth::user();
+        } else {
+            $user = User::whereEmail($oauthUser->email)->first();
+            if (count($user) === 0) {
+                $name = $oauthUser->nickname;
+                if (empty($name)) {
+                    $name = $oauthUser->name;
+                }
+                $user = $this->create([
+                    'name' => $name,
+                    'email' => $oauthUser->email,
+                    'password' => $oauthUser->token,
+                ]);
+            }
+        }
+        $oauth = Oauth::whereProvider($provider)->whereUid($oauthUser->id)->first();
+        if (count($oauth) === 0) {
+            $oauth = new Oauth();
+            $oauth->provider = $provider;
+            $oauth->uid = $oauthUser->id;
+        }
+        $oauth->nickname = $oauthUser->nickname;
+        $oauth->name = $oauthUser->name;
+        $oauth->email = $oauthUser->email;
+        $oauth->avatar = $oauthUser->avatar;
+        $oauth->token = $oauthUser->token;
+        $oauth->tokenSecret = $oauthUser->tokenSecret;
+        $oauth->user = print_r($oauthUser->user, TRUE);
+        $oauth = $user->oauths()->save($oauth);
+
+        Auth::login($user);
+        return Redirect::to('/');
     }
 }

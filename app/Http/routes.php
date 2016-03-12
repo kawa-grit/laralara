@@ -25,6 +25,9 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+    Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+
     Route::get('/home', 'HomeController@index');
 
     Route::group(['domain' => 'dev.back-gammon.tv'], function() {

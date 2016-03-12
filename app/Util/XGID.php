@@ -13,58 +13,58 @@ class XGID {
 	const PLAYER_X = 'X';
 	const PLAYER_O = 'O';
 
-	private static $_ValidCubeValue = array(0, 1, 2, 3, 4);
+	private static $_ValidCubeValue = [0, 1, 2, 3, 4];
 
 	const UNLIMITED = 0;
 
 	const NO_RULE = 0;
 	const CRAWFORD = 1;
 
-	private static $_PointMatchRule = array(
+	private static $_PointMatchRule = [
 		self::NO_RULE,
 		self::CRAWFORD,
-	);
+	];
 
 	const JACOBY = 1;
 	const BEAVER = 2;
 	const JACOBY_BEAVER = 3;
 
-	private static $_UnlimitedMatchRule = array(
+	private static $_UnlimitedMatchRule = [
 		self::NO_RULE,
 		self::JACOBY,
 		self::BEAVER,
 		self::JACOBY_BEAVER,
-	);
+	];
 
 	const NO_OWNER = 0;
 	const OWNER_X = 1;
 	const OWNER_O = -1;
 
-	private static $_PlayerType = array(
+	private static $_PlayerType = [
 		self::OWNER_X => self::PLAYER_X,
 		self::OWNER_O => self::PLAYER_O,
-	);
+	];
 
-	public static $_OpponentPlayerType = array(
+	public static $_OpponentPlayerType = [
 		self::PLAYER_X => self::PLAYER_O,
 		self::PLAYER_O => self::PLAYER_X,
-	);
+	];
 
-	public static $_Owner = array(
+	public static $_Owner = [
 		self::PLAYER_X => self::OWNER_X,
 		self::PLAYER_O => self::OWNER_O,
-	);
+	];
 
-	public static $_ReverseOwner = array(
+	public static $_ReverseOwner = [
 		self::NO_OWNER => self::NO_OWNER,
 		self::OWNER_X => self::OWNER_O,
 		self::OWNER_O => self::OWNER_X,
-	);
+	];
 
 	const PREFIX = 'XGID=';
 
 	private static function trim($xgid) {
-		foreach (array(self::PREFIX) as $word) {
+		foreach ([self::PREFIX] as $word) {
 			if (Utils::startsWithIgnoreCase($xgid, $word)) {
 				$xgid = substr($xgid, strlen($word));
 			}
@@ -89,11 +89,11 @@ class XGID {
 			throw new XGIDException('2');
 		}
 		// キューブ主チェック
-		if (!in_array($xgidArray[2], array(self::NO_OWNER, self::OWNER_X, self::OWNER_O))) {
+		if (!in_array($xgidArray[2], [self::NO_OWNER, self::OWNER_X, self::OWNER_O])) {
 			throw new XGIDException('3');
 		}
 		// アクション主チェック
-		if (!in_array($xgidArray[3], array(self::OWNER_X, self::OWNER_O))) {
+		if (!in_array($xgidArray[3], [self::OWNER_X, self::OWNER_O])) {
 			throw new XGIDException('4');
 		}
 		// アクションとの相関チェック
@@ -190,11 +190,11 @@ class XGID {
 	}
 
 	public function isJacoby() {
-		return $this->isUnlimitedMatch() && in_array($this->rule, array(self::JACOBY, self::JACOBY_BEAVER));
+		return $this->isUnlimitedMatch() && in_array($this->rule, [self::JACOBY, self::JACOBY_BEAVER]);
 	}
 
 	public function isBeaver() {
-		return $this->isUnlimitedMatch() && in_array($this->rule, array(self::BEAVER, self::JACOBY_BEAVER));
+		return $this->isUnlimitedMatch() && in_array($this->rule, [self::BEAVER, self::JACOBY_BEAVER]);
 	}
 
 	public function pipX() {
@@ -222,7 +222,7 @@ class XGID {
 	}
 
 	public function xgidValue() {
-		return implode(self::DELIM, array(
+		return implode(self::DELIM, [
 			$this->checker->checkerValue(),
 			$this->cube,
 			$this->cubeOwn,
@@ -272,7 +272,7 @@ class XGID {
 		$this->cubeOwn = self::$_ReverseOwner[$this->cubeOwn];
 		$this->actionOwn = self::$_ReverseOwner[$this->actionOwn];
 		// スコア反転
-		list($this->pointX, $this->pointO) = array($this->pointO, $this->pointX);
+		list($this->pointX, $this->pointO) = [$this->pointO, $this->pointX);
 
 		return $this;
 	}

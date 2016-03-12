@@ -158,25 +158,25 @@ class PositionImage {
 	const BLACK = 'Black';
 	const WHITE = 'White';
 
-	public static $_PlayerColorBlackWhite = array(
+	public static $_PlayerColorBlackWhite = [
 		XGID::PLAYER_X => self::BLACK,
 		XGID::PLAYER_O => self::WHITE,
-	);
+	];
 
-	public static $_PlayerColorWhiteBlack = array(
+	public static $_PlayerColorWhiteBlack = [
 		XGID::PLAYER_X => self::WHITE,
 		XGID::PLAYER_O => self::BLACK,
-	);
+	];
 
 	const BOARD_NORMAL = '';
 	const BOARD_1792 = '1792';
 	const BOARD_Arrow = 'Arrow';
 
-	public static $_BoardType = array(
+	public static $_BoardType = [
 		self::BOARD_NORMAL => FALSE,
 		self::BOARD_1792 => FALSE,
 		self::BOARD_Arrow => TRUE,
-	);
+	];
 
 	const LEFT = 'left';
 	const RIGHT = 'right';
@@ -184,115 +184,115 @@ class PositionImage {
 	const BGTV_LOGO = 'bgtv';
 	const BGEXAM_LOGO = 'bgexam';
 
-	public static $_LogoXY = array(
-		self::BGTV_LOGO => array(
-			XGID::PLAYER_X => array('X' =>  60, 'Y' => 135, 'type' => 'LogoBack-GammonTV'),
-			XGID::PLAYER_O => array('X' => 234, 'Y' => 135, 'type' => 'LogoBack-GammonTV'),
-		),
-		self::BGEXAM_LOGO => array(
-			XGID::PLAYER_X => array('X' =>  48, 'Y' => 144, 'type' => 'LogoBackGammonExamCOM'),
-			XGID::PLAYER_O => array('X' => 222, 'Y' => 144, 'type' => 'LogoBackGammonExamCOM'),
-		),
-	);
+	public static $_LogoXY = [
+		self::BGTV_LOGO => [
+			XGID::PLAYER_X => ['X' =>  60, 'Y' => 135, 'type' => 'LogoBack-GammonTV'],
+			XGID::PLAYER_O => ['X' => 234, 'Y' => 135, 'type' => 'LogoBack-GammonTV'],
+		],
+		self::BGEXAM_LOGO => [
+			XGID::PLAYER_X => ['X' =>  48, 'Y' => 144, 'type' => 'LogoBackGammonExamCOM'],
+			XGID::PLAYER_O => ['X' => 222, 'Y' => 144, 'type' => 'LogoBackGammonExamCOM'],
+		],
+	];
 
-	private static $_CubeActionXY = array(
-		XGID::OWNER_X => array('X' => 278, 'Y' => 134, 'type' => 'Cube'),
-		XGID::OWNER_O => array('X' =>  94, 'Y' => 134, 'type' => 'Cube'),
-	);
+	private static $_CubeActionXY = [
+		XGID::OWNER_X => ['X' => 278, 'Y' => 134, 'type' => 'Cube'],
+		XGID::OWNER_O => ['X' =>  94, 'Y' => 134, 'type' => 'Cube'],
+	];
 
-	private static $_CubeXY = array(
-		self::LEFT => array(
-			XGID::NO_OWNER => array('X' => 368, 'Y' => 136, 'type' => 'Cube'),
-			XGID::OWNER_X  => array('X' => 368, 'Y' => 259, 'type' => 'Cube'),
-			XGID::OWNER_O  => array('X' => 368, 'Y' =>  14, 'type' => 'Cube'),
-		),
-		self::RIGHT => array(
-			XGID::NO_OWNER => array('X' => 2, 'Y' => 136, 'type' => 'Cube'),
-			XGID::OWNER_X  => array('X' => 2, 'Y' => 259, 'type' => 'Cube'),
-			XGID::OWNER_O  => array('X' => 2, 'Y' =>  14, 'type' => 'Cube'),
-		),
-	);
+	private static $_CubeXY = [
+		self::LEFT => [
+			XGID::NO_OWNER => ['X' => 368, 'Y' => 136, 'type' => 'Cube'],
+			XGID::OWNER_X  => ['X' => 368, 'Y' => 259, 'type' => 'Cube'],
+			XGID::OWNER_O  => ['X' => 368, 'Y' =>  14, 'type' => 'Cube'],
+		],
+		self::RIGHT => [
+			XGID::NO_OWNER => ['X' => 2, 'Y' => 136, 'type' => 'Cube'],
+			XGID::OWNER_X  => ['X' => 2, 'Y' => 259, 'type' => 'Cube'],
+			XGID::OWNER_O  => ['X' => 2, 'Y' =>  14, 'type' => 'Cube'],
+		],
+	];
 
-	private static $_DiceXY = array(
-		XGID::PLAYER_X => array(
-			array('X' => 253, 'Y' => 136, 'type' => 'Dice'),
-			array('X' => 303, 'Y' => 136, 'type' => 'Dice'),
-		),
-		XGID::PLAYER_O => array(
-			array('X' =>  69, 'Y' => 136, 'type' => 'Dice'),
-			array('X' => 119, 'Y' => 136, 'type' => 'Dice'),
-		),
-	);
+	private static $_DiceXY = [
+		XGID::PLAYER_X => [
+			['X' => 253, 'Y' => 136, 'type' => 'Dice'],
+			['X' => 303, 'Y' => 136, 'type' => 'Dice'],
+		],
+		XGID::PLAYER_O => [
+			['X' =>  69, 'Y' => 136, 'type' => 'Dice'],
+			['X' => 119, 'Y' => 136, 'type' => 'Dice'],
+		],
+	];
 
-	private static $_PlayerOffXY = array(
-		self::LEFT => array(
-			XGID::PLAYER_X => array('X' =>   4, 'Y' => 164, 'type' => 'OffCheckerBottom'),
-			XGID::PLAYER_O => array('X' =>   4, 'Y' =>  14, 'type' => 'OffCheckerTop'),
-		),
-		self::RIGHT => array(
-			XGID::PLAYER_X => array('X' => 370, 'Y' => 164, 'type' => 'OffCheckerBottom'),
-			XGID::PLAYER_O => array('X' => 370, 'Y' =>  14, 'type' => 'OffCheckerTop'),
-		),
-	);
+	private static $_PlayerOffXY = [
+		self::LEFT => [
+			XGID::PLAYER_X => ['X' =>   4, 'Y' => 164, 'type' => 'OffCheckerBottom'],
+			XGID::PLAYER_O => ['X' =>   4, 'Y' =>  14, 'type' => 'OffCheckerTop'],
+		],
+		self::RIGHT => [
+			XGID::PLAYER_X => ['X' => 370, 'Y' => 164, 'type' => 'OffCheckerBottom'],
+			XGID::PLAYER_O => ['X' => 370, 'Y' =>  14, 'type' => 'OffCheckerTop'],
+		],
+	];
 
-	private static $_CheckerXY = array(
+	private static $_CheckerXY = [
 		// 奥プレイヤーバー ⇒ 左下 ⇒ 右下 ⇒ 右上 ⇒ 左上 ⇒ 手前プレイヤーバー
-		self::LEFT => array(
-			array('X' => 187.0, 'Y' => 155.0, 'type' => 'CheckerTop'),
-			array('X' =>  35.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' =>  60.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' =>  85.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 110.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 135.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 160.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 213.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 238.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 263.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 288.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 313.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 338.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 338.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 313.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 288.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 263.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 238.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 213.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 160.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 135.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 110.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' =>  85.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' =>  60.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' =>  35.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 187.0, 'Y' =>  30.0, 'type' => 'CheckerBottom'),
-		),
+		self::LEFT => [
+			['X' => 187.0, 'Y' => 155.0, 'type' => 'CheckerTop'],
+			['X' =>  35.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' =>  60.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' =>  85.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 110.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 135.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 160.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 213.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 238.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 263.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 288.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 313.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 338.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 338.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 313.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 288.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 263.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 238.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 213.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 160.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 135.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 110.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' =>  85.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' =>  60.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' =>  35.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 187.0, 'Y' =>  30.0, 'type' => 'CheckerBottom'],
+		],
 		// 奥プレイヤーバー ⇒ 右下 ⇒ 左下 ⇒ 左上 ⇒ 右上 ⇒ 手前プレイヤーバー
-		self::RIGHT => array(
-			array('X' => 187.0, 'Y' => 155.0, 'type' => 'CheckerTop'),
-			array('X' => 338.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 313.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 288.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 263.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 238.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 213.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 160.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 135.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' => 110.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' =>  85.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' =>  60.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' =>  35.5, 'Y' => 173.0, 'type' => 'CheckerBottom'),
-			array('X' =>  35.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' =>  60.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' =>  85.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 110.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 135.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 160.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 213.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 238.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 263.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 288.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 313.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 338.5, 'Y' =>  13.5, 'type' => 'CheckerTop'),
-			array('X' => 187.0, 'Y' =>  30.0, 'type' => 'CheckerBottom'),
-		),
-	);
+		self::RIGHT => [
+			['X' => 187.0, 'Y' => 155.0, 'type' => 'CheckerTop'],
+			['X' => 338.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 313.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 288.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 263.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 238.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 213.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 160.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 135.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' => 110.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' =>  85.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' =>  60.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' =>  35.5, 'Y' => 173.0, 'type' => 'CheckerBottom'],
+			['X' =>  35.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' =>  60.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' =>  85.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 110.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 135.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 160.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 213.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 238.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 263.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 288.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 313.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 338.5, 'Y' =>  13.5, 'type' => 'CheckerTop'],
+			['X' => 187.0, 'Y' =>  30.0, 'type' => 'CheckerBottom'],
+		],
+	];
 }

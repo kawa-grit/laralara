@@ -11,17 +11,17 @@ class CheckerInfo {
 
 	const POSITION_COUNT = 26;
 
-	private static $_BarIndex = array(
+	private static $_BarIndex = [
 		XGID::PLAYER_X => 25,
 		XGID::PLAYER_O => 0,
-	);
+	];
 
 	private $checkerValue;
 	private $pointArray;
 
 	public function __construct($checkerValue) {
 		$this->checkerValue = $checkerValue;
-		$this->pointArray = array();
+		$this->pointArray = [];
 		$this->validate($checkerValue);
 	}
 
@@ -37,10 +37,10 @@ class CheckerInfo {
 	}
 
 	public function bearoffCount() {
-		$playerOffCount = array(
+		$playerOffCount = [
 			XGID::PLAYER_X => self::PLAYER_MAX,
 			XGID::PLAYER_O => self::PLAYER_MAX,
-		);
+		];
 		for ($i = 0; $i < self::POSITION_COUNT; $i++) {
 			$point = $this->point($i);
 			if ($point->count > 0) {
@@ -71,7 +71,7 @@ class CheckerInfo {
 	}
 
 	public function pipCount() {
-		$pipCount = array(XGID::PLAYER_X => 0, XGID::PLAYER_O => 0);
+		$pipCount = [XGID::PLAYER_X => 0, XGID::PLAYER_O => 0];
 		foreach ($this->pointArray as $point) {
 			if ($point->count > 0) {
 				$pipCount[$point->playerType] += $point->pip();
@@ -92,7 +92,7 @@ class CheckerInfo {
 					self::POSITION_COUNT));
 		}
 		// チェッカー枚数カウント
-		$checkerCountSum = array(XGID::PLAYER_X => 0, XGID::PLAYER_O => 0);
+		$checkerCountSum = [XGID::PLAYER_X => 0, XGID::PLAYER_O => 0];
 		foreach ($checkerValueArray as $i => $checkerItem) {
 			$point = new CheckerPoint($i, $checkerItem);
 			if ($point->count > 0) {

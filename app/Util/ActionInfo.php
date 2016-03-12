@@ -40,9 +40,9 @@ abstract class ActionInfo {
 	const CUBE_BEFORE = 'cubeBeforeAction';
 	const CUBE_AFTER = 'cubeAfterAction';
 
-	public static $_ActionType = array(
+	public static $_ActionType = [
 		self::MOVE,
 		self::CUBE_BEFORE,
 		self::CUBE_AFTER,
-	);
+	];
 }

@@ -9,7 +9,7 @@ class CheckerPoint {
 
 	const NONE = '-';
 
-	private static $_CheckerCount = array(
+	private static $_CheckerCount = [
 		self::NONE => 0,
 		'A' => 1,  'a' => 1,
 		'B' => 2,  'b' => 2,
@@ -26,9 +26,9 @@ class CheckerPoint {
 		'M' => 13, 'm' => 13,
 		'N' => 14, 'n' => 14,
 		'O' => 15, 'o' => 15,
-	);
+	];
 
-	private static $_CheckerType = array(
+	private static $_CheckerType = [
 		'A' => XGID::PLAYER_X, 'a' => XGID::PLAYER_O,
 		'B' => XGID::PLAYER_X, 'b' => XGID::PLAYER_O,
 		'C' => XGID::PLAYER_X, 'c' => XGID::PLAYER_O,
@@ -44,15 +44,15 @@ class CheckerPoint {
 		'M' => XGID::PLAYER_X, 'm' => XGID::PLAYER_O,
 		'N' => XGID::PLAYER_X, 'n' => XGID::PLAYER_O,
 		'O' => XGID::PLAYER_X, 'o' => XGID::PLAYER_O,
-	);
+	];
 
-	private static $_OffIndex = array(
+	private static $_OffIndex = [
 		XGID::OWNER_X => 0,
 		XGID::OWNER_O => 25,
-	);
+	];
 
-	private static $_CheckerCountAsPlayer = array(
-		XGID::PLAYER_X => array(
+	private static $_CheckerCountAsPlayer = [
+		XGID::PLAYER_X => [
 			0 => self::NONE, 8  => 'H',
 			1 => 'A',        9  => 'I',
 			2 => 'B',        10 => 'J',
@@ -61,8 +61,8 @@ class CheckerPoint {
 			5 => 'E',        13 => 'M',
 			6 => 'F',        14 => 'N',
 			7 => 'G',        15 => 'O',
-		),
-		XGID::PLAYER_O => array(
+		],
+		XGID::PLAYER_O => [
 			0 => self::NONE, 8  => 'h',
 			1 => 'a',        9  => 'i',
 			2 => 'b',        10 => 'j',
@@ -71,11 +71,11 @@ class CheckerPoint {
 			5 => 'e',        13 => 'm',
 			6 => 'f',        14 => 'n',
 			7 => 'g',        15 => 'o',
-		),
-	);
+		],
+	];
 
-	private static $_PipCountMaster = array(
-		XGID::PLAYER_X => array(
+	private static $_PipCountMaster = [
+		XGID::PLAYER_X => [
 			 0 =>  0, 13 => 13,
 			 1 =>  1, 14 => 14,
 			 2 =>  2, 15 => 15,
@@ -89,8 +89,8 @@ class CheckerPoint {
 			10 => 10, 23 => 23,
 			11 => 11, 24 => 24,
 			12 => 12, 25 => 25,
-		),
-		XGID::PLAYER_O => array(
+		],
+		XGID::PLAYER_O => [
 			 0 => 25, 13 => 12,
 			 1 => 24, 14 => 11,
 			 2 => 23, 15 => 10,
@@ -104,10 +104,10 @@ class CheckerPoint {
 			10 => 15, 23 =>  2,
 			11 => 14, 24 =>  1,
 			12 => 13, 25 =>  0,
-		),
-	);
+		],
+	];
 
-	private static $_ReverseValue = array(
+	private static $_ReverseValue = [
 		'-' => '-',
 		'a' => 'A', 'A' => 'a',
 		'b' => 'B', 'B' => 'b',
@@ -124,7 +124,7 @@ class CheckerPoint {
 		'm' => 'M', 'M' => 'm',
 		'n' => 'N', 'N' => 'n',
 		'o' => 'O', 'O' => 'o',
-	);
+	];
 
 	public $index;
 	public $point;
@@ -162,7 +162,7 @@ class CheckerPoint {
 			$this->playerType = FALSE;
 			$this->ownDiv = FALSE;
 		}
-		return array($this, $toPoint);
+		return [$this, $toPoint];
 	}
 
 	public function reverse($i) {

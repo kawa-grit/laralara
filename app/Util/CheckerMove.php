@@ -10,7 +10,7 @@ class CheckerMove {
 
 	const ILLEGAL = '[I]';
 
-	private static $_ReverseIndex = array(
+	private static $_ReverseIndex = [
 		 0 => 25, 13 => 12,
 		 1 => 24, 14 => 11,
 		 2 => 23, 15 => 10,
@@ -24,12 +24,12 @@ class CheckerMove {
 		10 => 15, 23 =>  2,
 		11 => 14, 24 =>  1,
 		12 => 13, 25 =>  0,
-	);
+	];
 
 	public $moveValue;
 
 	public $fromIndex;
-	public $toIndex = array();
+	public $toIndex = [];
 
 	public $hit = FALSE;
 	public $illegal = FALSE;
@@ -50,7 +50,7 @@ class CheckerMove {
 			$moveValue = str_replace('*', '', $moveValue);
 		}
 		// 移動文字と枚数に分割
-		$moveValueArray = Utils::trimArray(explode(' ', str_replace(array('(', ')'), ' ', $moveValue)));
+		$moveValueArray = Utils::trimArray(explode(' ', str_replace(['(', ')'], ' ', $moveValue)));
 		// 枚数指定をチェック
 		if (count($moveValueArray) == 2) {
 			$moveValue = $moveValueArray[0];
@@ -129,7 +129,7 @@ class CheckerMove {
 				__METHOD__ . '移動元インデックスの駒数不足' . $fromPoint . $this->count);
 		}
 		// 移動先インデックスチェック
-		$hitPoint = array();
+		$hitPoint = [];
 		$finalToPoint = NULL;
 		foreach ($this->toIndex as $index) {
 			$toPoint = $xgid->checker->point($index);

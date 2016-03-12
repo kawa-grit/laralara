@@ -22,7 +22,7 @@ class ActionDice extends ActionInfo {
 
 	public function __construct($actionValue) {
 		parent::__construct($actionValue);
-		$this->checkerMoveArray = array();
+		$this->checkerMoveArray = [];
 		if (!$this->noAction()) {
 			foreach (explode(' ', $this->actionValue) as $actionItem) {
 				if ($actionItem === '') {
@@ -35,7 +35,7 @@ class ActionDice extends ActionInfo {
 				$this->checkerMoveArray[] = new CheckerMove($actionItem);
 			}
 		}
-		$this->errorMessageArray = array();
+		$this->errorMessageArray = [];
 	}
 
 	public function execute($xgid) {

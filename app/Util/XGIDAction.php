@@ -13,9 +13,9 @@ class XGIDAction {
 	const NO_ACTION = '0';
 	const NO_ACTION_VALUE = '00';
 
-	private static $_DiceValue = array(
+	private static $_DiceValue = [
 		1, 2, 3, 4, 5, 6,
-	);
+	];
 
 	public static function noAction() {
 		return new XGIDAction(self::NO_ACTION_VALUE);
