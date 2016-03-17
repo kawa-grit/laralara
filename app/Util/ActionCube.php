@@ -10,10 +10,13 @@ class ActionCube extends ActionInfo {
 	const TAKES = 'Takes';
 	const DROPS = 'Drops';
 
+	const DOUBLE_TAKE = 'Double, take';
+
 	public static function match($actionValue) {
 		return strcasecmp($actionValue, self::DOUBLES) === 0 or
 			strcasecmp($actionValue, self::TAKES) === 0 or
-			strcasecmp($actionValue, self::DROPS) === 0;
+			strcasecmp($actionValue, self::DROPS) === 0 or
+			strcasecmp($actionValue, self::DOUBLE_TAKE) === 0;
 	}
 
 	public function execute($xgid) {
@@ -37,6 +40,13 @@ class ActionCube extends ActionInfo {
 			$xgid->cubeOwn = XGID::NO_OWNER;
 			// TODO 独自XGID仕様
 			$xgid->action = XGIDAction::noAction();
+		} elseif ($this->isCubeActionDoubleTake()) {
+			// キューブを1UP
+			$xgid->cube += 1;
+			// キューブオーナーを相手オーナーに
+			$xgid->cubeOwn = XGID::$_ReverseOwner[$xgid->actionOwn];
+			// TODO 独自XGID仕様
+			$xgid->action = XGIDAction::noAction();
 		} else {
 			throw new ActionCubeException();
 		}
@@ -53,5 +63,9 @@ class ActionCube extends ActionInfo {
 
 	public function isCubeActionDrop() {
 		return strcasecmp($this->actionValue, self::DROPS) === 0;
+	}
+
+	public function isCubeActionDoubleTake() {
+		return strcasecmp($this->actionValue, self::DOUBLE_TAKE) === 0;
 	}
 }

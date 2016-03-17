@@ -6,7 +6,7 @@ namespace App\Util;
 class XGIDException extends \Exception {}
 
 class XGID {
-	const INIT = '-b----E-C---eE---c-e----B-:0:0:1:11:0:0:0:0:10';
+	const INIT = '-b----E-C---eE---c-e----B-:0:0:1:00:0:0:0:0:10';
 
 	const DELIM = ':';
 
@@ -104,12 +104,12 @@ class XGID {
 				throw new XGIDException('5');
 			}
 			// キューブ主が未指定か判定
-			if ($xgidArray[2] == 0) {
+			if ($xgidArray[2] == self::NO_OWNER) {
 				throw new XGIDException('6');
 			}
 		} elseif ($action->isDice()) {
 			// キューブ値があり、キューブ主が未指定か判定
-			if ($xgidArray[1] > 0 && $xgidArray[2] == 0) {
+			if ($xgidArray[1] > 0 && $xgidArray[2] == self::NO_OWNER) {
 				throw new XGIDException('7');
 			}
 		}
@@ -233,7 +233,13 @@ class XGID {
 			$this->rule,
 			$this->matchPoint,
 			$this->maxCube,
-		));
+		]);
+	}
+
+	public function nextTurn() {
+		$this->actionOwn = self::$_ReverseOwner[$this->actionOwn];
+		$this->action = XGIDAction::noAction();
+		return $this;
 	}
 
 	public function setTurn($playerType) {
@@ -262,7 +268,8 @@ class XGID {
 	 * @param $actionInfo MoveActionInfo
 	 */
 	public function executeAction($actionValue) {
-		return ActionInfo::create($actionValue)->execute($this);
+		ActionInfo::create($actionValue)->execute($this);
+		return $this;
 	}
 
 	public function reverseXO() {
@@ -272,7 +279,7 @@ class XGID {
 		$this->cubeOwn = self::$_ReverseOwner[$this->cubeOwn];
 		$this->actionOwn = self::$_ReverseOwner[$this->actionOwn];
 		// スコア反転
-		list($this->pointX, $this->pointO) = [$this->pointO, $this->pointX);
+		list($this->pointX, $this->pointO) = [$this->pointO, $this->pointX];
 
 		return $this;
 	}

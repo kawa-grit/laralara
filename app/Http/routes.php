@@ -28,17 +28,40 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('', 'HomeController@index');
 
     Route::group(['domain' => 'dev.back-gammon.tv'], function() {
-        Route::get('', 'Regular\Controller@index');
-        Route::get('sss', 'Regular\Controller@show');
-        Route::get('aaa', function () {
-            return view('welcome');
+        Route::get('calc/{xgid}', 'Regular\PositionController@calc');
+
+        Route::get('images/xg/{xgid}', 'Regular\PositionController@images');
+        Route::get('download/xg/{xgid}', 'Regular\PositionController@download');
+
+        Route::group(['prefix' => 'record'], function () {
+            Route::get('turn/{xgid}', function ($xgid) {
+                $xgidObj = new \App\Util\XGID($xgid);
+                $action = $xgidObj->action;
+                $xgidObj->nextTurn();
+                $xgidObj->action = $action;
+                return $xgidObj->xgidValue();
+            });
+            Route::get('dice/{xgid}', function ($xgid) {
+                $xgidObj = new \App\Util\XGID($xgid);
+                return $xgidObj->action->value;
+            });
+            Route::get('dice/{xgid}/{action}', function ($xgid, $action) {
+                $xgidObj = new \App\Util\XGID($xgid);
+                $xgidObj->action = new \App\Util\XGIDAction($action);
+                return $xgidObj->xgidValue();
+            });
+            Route::get('{xgid?}', function ($xgid=NULL) {
+                if (isset($xgid)) {
+                    new \App\Util\XGID($xgid);
+                } else {
+                    $xgid = \App\Util\XGID::INIT;
+                }
+                return view('record', ['xgid'=>$xgid]);
+            });
         });
-        Route::get('test/xg', 'Regular\PositionController@test');
-        Route::get('images/xg', 'Regular\PositionController@images');
-        Route::get('download/xg', 'Regular\PositionController@download');
     });
 
     Route::group(['domain' => 'reg.back-gammon.tv'], function() {
@@ -46,8 +69,4 @@ Route::group(['middleware' => 'web'], function () {
             return 'Hello! Domain3';
         });
     });
-});
-
-Route::get('', function () {
-    return 'Hello!';
 });

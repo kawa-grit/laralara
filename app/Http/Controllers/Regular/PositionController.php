@@ -2,35 +2,53 @@
 
 namespace App\Http\Controllers\Regular;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class PositionController extends BaseController {
 
-    private function makeImage() {
-        $prexgid = new \App\Util\XGID('XGID=--aCBBB-C---d-a--d-c-bB-A-:0:0:-1:11:0:0:0:11:10');
-        $xgid = new \App\Util\XGID('XGID=--aCBBB-C---d-a--d-c-bB-A-:0:0:-1:11:0:0:0:11:10');
-        //$xgid->executeAction('8/7(2) 3/1 22/14*');
-        $xgid->executeAction('13/11(2) 4/1* 23/11');
-        $image = $xgid->createPositionImage($prexgid);
-        $imagePath = storage_path('app/public/hoge.png'); // TODO
+    private function makeImage($xgid, $move) {
+        $xgidObj = new \App\Util\XGID($xgid);
+        if (isset($move)) {
+            $xgidObj->executeAction($move);
+            $image = $xgidObj->createPositionImage(new \App\Util\XGID($xgid));
+        } else {
+            $image = $xgidObj->createPositionImage();
+        }
+        $imagePath = storage_path(sprintf('app/public/%s.png', uniqid('position_')));
         imagepng($image, $imagePath);
         imagedestroy($image);
         return $imagePath;
     }
 
-    public function test() {
-        return $this->makeImage();
+    public function calc(Request $request, $xgid) {
+        $client = new \GuzzleHttp\Client();
+        $jsonPath = storage_path(sprintf('app/public/%s.json', uniqid('xgid_')));
+        $client->get('http://app.river.xvs.jp/xgid/'.$xgid, [
+            'save_to'=>$jsonPath
+        ]);
+        $gnubgResult = json_decode(file_get_contents($jsonPath));
+        unlink($jsonPath);
+        // 付加情報(移動後XGID)
+        foreach ($gnubgResult->moveEquities as &$moveEquities) {
+            $moveEquities->xgid = (new \App\Util\XGID($xgid))->executeAction($moveEquities->value)->nextTurn()->xgidValue();
+        }
+        foreach ($gnubgResult->cubeEquities as &$cubeEquities) {
+            if (\App\Util\ActionCube::match($cubeEquities->value)) {
+                $cubeEquities->xgid = (new \App\Util\XGID($xgid))->executeAction($cubeEquities->value)->xgidValue();
+            } else {
+                $cubeEquities->xgid = NULL;
+            }
+        }
+        return response()->json($gnubgResult);
     }
 
-    public function images() {
-        return \Response::make(\File::get($this->makeImage()), 200)->header('Content-type', 'image/png');
+    public function images(Request $request, $xgid) {
+        return \Response::make(\File::get($this->makeImage($xgid, $request->input('m'))), 200)->header('Content-type', 'image/png');
     }
 
-    public function download() {
-        return response()->download($this->makeImage());
+    public function download(Request $request, $xgid) {
+        return response()->download($this->makeImage($xgid, $request->input('m')));
     }
 }
