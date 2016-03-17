@@ -14,13 +14,14 @@ class CreateUserOauthsTable extends Migration {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('provider');
+            $table->boolean('enabled')->default(TRUE);
             $table->string('uid');
             $table->string('nickname')->nullable();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('avatar')->nullable();
             $table->string('token');
-            $table->string('tokenSecret')->nullable();
+            $table->string('token_secret')->nullable();
             $table->string('user');
             $table->timestamps();
         });

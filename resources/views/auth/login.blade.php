@@ -10,6 +10,9 @@
                     <a href="{{ url('/auth/facebook') }}">Facebook</a>
                 </div>
                 <div class="panel-body">
+                    <a href="{{ url('/auth/twitter') }}">Twitter</a>
+                </div>
+                <div class="panel-body">
                     <a href="{{ url('/auth/google') }}">Google</a>
                 </div>
             </div>
@@ -51,7 +54,7 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember">パスワードを記憶させる
+                                        <input type="checkbox" name="remember">ログイン状態を保存する
                                     </label>
                                 </div>
                             </div>

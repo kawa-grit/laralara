@@ -108,7 +108,11 @@ class AuthController extends Controller
         $oauth->email = $oauthUser->email;
         $oauth->avatar = $oauthUser->avatar;
         $oauth->token = $oauthUser->token;
-        $oauth->tokenSecret = $oauthUser->tokenSecret;
+        if (property_exists($oauthUser, 'tokenSecret')) {
+            $oauth->token_secret = $oauthUser->tokenSecret;
+        } else {
+            $oauth->token_secret = NULL;
+        }
         $oauth->user = print_r($oauthUser->user, TRUE);
         $oauth = $user->oauths()->save($oauth);
 
